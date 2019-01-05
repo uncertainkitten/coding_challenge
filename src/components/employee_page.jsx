@@ -17,6 +17,7 @@ class EmployeeIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     // make a get request to cts/employee
+    // get a payload, and pass that payload to the EmployeePageInfo component
   }
 
   render(){
