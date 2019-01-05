@@ -16,6 +16,12 @@ class EmployeeInfoForm extends React.Component{
     this.handleSave = this.handleSave.bind(this);
   }
 
+  update(field) {
+    return e => this.setState({
+      [field]: e.currentTarget.value
+    });
+  }
+
   handleSave(e){
     e.preventDefault();
     //Make a POST request to cts/employees
@@ -23,7 +29,8 @@ class EmployeeInfoForm extends React.Component{
 
   handleDelete(e){
     e.preventDefault();
-   //Gray out this button, send error saying no employee selected
+   //Gray out if no empId exists
+   //Do the delete if it does exist
   }
 
   render(){
@@ -51,3 +58,5 @@ class EmployeeInfoForm extends React.Component{
     )
   }
 }
+
+export default EmployeeInfoForm;
