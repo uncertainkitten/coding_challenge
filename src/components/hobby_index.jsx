@@ -9,16 +9,33 @@ class HobbyIndex extends React.Component{
       hobbyId: 2,
       hobbies: ["Punching Computers", "Getting Mad At Video Games", "Depression"],
       editMode: {},
-      editButtonMode: false
+      editButtonMode: false,
+      checked: {}
     }
     this.handleAdd = this.handleAdd.bind(this);
     this.changeHobby = this.changeHobby.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
   }
 
   changeHobby(key, hobby){
     let hobbies = this.state.hobbies.slice()
     hobbies[key] = hobby
     this.setState({hobbies});
+  }
+
+  toggleCheckbox(key){
+    let checked = {...this.state.checked}
+    checked[key] = !this.state.checked[key]
+    this.setState({checked})
+  }
+
+  handleDelete(){
+
+  }
+
+  handleEdit(){
+
   }
 
   handleAdd(e){
@@ -32,28 +49,31 @@ class HobbyIndex extends React.Component{
     });
   }
 
-  handleSubmit(){
-    
+  handleSave(e){
+    e.preventDefault();
+    this.setState({
+        editMode: {},
+        editButtonMode: false
+    });
   }
 
   render(){
     let hobbyComp = this.state.hobbies.map((hobby, index) => {
       if (this.state.editMode[index]){
-        return <NewHobbyIndexItem hobbyText={hobby} index={index} changeHobby={this.changeHobby} />
+        return <NewHobbyIndexItem hobbyText={hobby} index={index} changeHobby={this.changeHobby} toggleCheckbox={this.toggleCheckbox} />
       }else{
-        return <HobbyInfoItem hobbyText={hobby} index={index}/>
+        return <HobbyInfoItem hobbyText={hobby} index={index} toggleCheckbox={this.toggleCheckbox}/>
       }
     });
-    let editButton = <input type="submit" className="emp-btn" value="Edit" />
+    let editButton = <button className="emp-btn" onClick={this.handleEdit}>Edit</button>
     if (this.state.editButtonMode){
-      editButton = <input type="submit" className="emp-btn" value="Save" />
+      editButton = <button className="emp-btn" onClick={this.handleSave}>Save</button>
     }
-    return(<div className="hobby-index">
-      <form className="hobby-form" onSubmit={this.handleSubmit}>
-        <legend className="emp-label">Hobbies</legend><button className="emp-btn" onClick={this.handleAdd}>Add</button>
-        {hobbyComp}
-        {editButton}<input type="submit" className="emp-btn" value="Delete" />
-      </form>
+    return(
+    <div className="hobby-index">
+      <legend className="emp-label">Hobbies</legend><button className="emp-btn" onClick={this.handleAdd}>Add</button>
+      {hobbyComp}
+      {editButton}<input type="submit" className="emp-btn" value="Delete" />
     </div>);
   }
 }
