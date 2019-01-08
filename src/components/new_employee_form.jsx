@@ -12,7 +12,8 @@ class EmployeeInfoForm extends React.Component{
       state: "",
       country: "USA",
       zip: 0,
-      hobbies: []
+      hobbies: [],
+      empId: 0
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -30,8 +31,10 @@ class EmployeeInfoForm extends React.Component{
         zip: nextProps.address.zip,
         country: "USA",
         hobbies: nextProps.hobbies,
+        empId: nextProps.empId,
         error: false,
-        success: false
+        success: false,
+        delSucces: false
       });
     }
   }
@@ -72,23 +75,46 @@ class EmployeeInfoForm extends React.Component{
     })
     .catch(error => {
       this.setState({error: true});
-      console.log(error)})
+    });
   }
 
   handleDelete(e){
     e.preventDefault();
-   //Gray out if no empId exists
-   //Do the delete if it does exist
+    fetch(`http://104.248.219.208:8080/cts/employee?empId=${this.state.empId}`, {
+      method: 'delete'
+    })
+    .then(res => res.json())
+    .then(data => {this.setState({
+      firstName: "",
+      lastName: "",
+      street: "",
+      city: "",
+      state: "",
+      country: "USA",
+      zip: 0,
+      hobbies: [],
+      empId: 0,
+      error: false,
+      delSuccess: true});
+      this.props.clearForm();
+    })
+    .catch(error => {
+      this.setState({error: true});
+    });
   }
 
   render(){
-    let successMessage = <div>New Employee Created Successfully</div>;
+    let successMessage = <div>New employee created successfully!</div>;
     if (!this.state.success){
       successMessage = <div></div>
     }
+
+    if (this.state.delSuccess){
+      successMessage = <div>Deleted employee successfully!</div>
+    }
     let error = "";
     if (this.state.error){
-      error = <div>Something went wrong!</div>
+      error = <div>We couldn't process that request - please check to make sure you entered the correct information.</div>
     }
     return(
       <div className="emp-info">

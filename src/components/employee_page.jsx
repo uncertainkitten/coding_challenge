@@ -12,6 +12,7 @@ class EmployeeIndex extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getEmployee = this.getEmployee.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   update(field) {
@@ -33,12 +34,20 @@ class EmployeeIndex extends React.Component {
       .catch(error => this.setState({error: true}))
   }
 
+  clearForm(){
+    this.setState({
+      employeeId: "",
+      payload: false,
+      error: false
+    });
+  }
+
   render(){
     let component = <EmployeeInfoForm
         firstName=""
         lastName=""
         address={{zip: 0, state: "", city: "", street: ""}}
-        hobbies={[]} 
+        hobbies={[]}
         getEmployee={this.getEmployee}/>;
 
     if (!!this.state.payload){
@@ -47,12 +56,14 @@ class EmployeeIndex extends React.Component {
       lastName={this.state.payload.lastName}
       address={this.state.payload.address}
       hobbies={this.state.payload.hobbies}
-      getEmployee={this.getEmployee}/>;
+      getEmployee={this.getEmployee}
+      empId={this.state.employeeId}
+      clearForm={this.clearForm}/>;
     }
 
     let error = "";
     if (this.state.error){
-      error = <div>Something went wrong!</div>
+      error = <div>We couldn't process that search - did you put in the right employee ID?</div>
     }
     return(
       <div className="employee-index">
