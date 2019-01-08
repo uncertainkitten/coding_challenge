@@ -34,7 +34,7 @@ class EmployeeInfoForm extends React.Component{
         empId: nextProps.empId,
         error: false,
         success: false,
-        delSucces: false
+        delSuccess: false
       });
     }
   }

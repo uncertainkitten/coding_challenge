@@ -88,7 +88,16 @@ class HobbyIndex extends React.Component{
 
   render(){
     let hobbyComp = this.state.hobbies.map((hobby, index) => {
-      if (this.state.editMode[index]){
+      if (typeof hobby !== "string"){
+        return <HobbyInfoItem
+          hobbyText=""
+          index={index}
+          key={index}
+          toggleCheckbox={this.toggleCheckbox}
+          checked={!!this.state.checked[index]}
+        />
+      }
+      else if (this.state.editMode[index]){
         return <NewHobbyIndexItem
           hobbyText={hobby}
           index={index}
