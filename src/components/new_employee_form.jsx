@@ -6,20 +6,25 @@ class EmployeeInfoForm extends React.Component{
     super(props)
     this.state = {
       name: this.props.firstName + this.props.lastName,
-      street: this.props.address.street,
-      city: this.props.address.city,
-      state: this.props.address.state,
-      zip: this.props.address.zip,
-      hobbies: this.props.hobbies
+      street: this.props.street,
+      city: this.props.city,
+      state: this.props.state,
+      zip: this.props.zip,
+      hobbies: ["Pure", "Fucking", "Magic"]
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.setHobbies = this.setHobbies.bind(this);
   }
 
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
+  }
+
+  setHobbies(hobbies){
+    this.setState({hobbies: hobbies})
   }
 
   handleSave(e){
@@ -49,7 +54,7 @@ class EmployeeInfoForm extends React.Component{
           <label className="emp-label">Zip:</label>
           <input className="emp-info" type="text" value={this.state.zip} onChange={this.update("zip")}/>
           <div className="hobby-box">
-            <HobbyIndex hobbies={this.props.hobbies}/>
+            <HobbyIndex hobbies={this.state.hobbies} setHobbies={this.setHobbies}/>
           </div>
           <button className="delete-btn" onClick={this.handleDelete}>Delete Employee</button>
           <button className="save-btn" onClick={this.handleSave}>Create Employee</button>

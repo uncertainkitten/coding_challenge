@@ -6,30 +6,34 @@ class HobbyIndex extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      hobbyId: 2,
-      hobbies: ["Punching Computers", "Getting Mad At Video Games", "Depression"],
+      hobbyId: this.props.hobbies.length - 1,
+      hobbies: [],
       editMode: {},
       editButtonMode: false,
       checked: {}
     }
     this.handleAdd = this.handleAdd.bind(this);
-    this.changeHobby = this.changeHobby.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.changeHobby = this.changeHobby.bind(this);
   }
 
-  changeHobby(key, hobby){
-    let hobbies = this.state.hobbies.slice();
-    hobbies[key] = hobby
-    this.setState({hobbies});
+  componentDidMount(){
+    this.setState({hobbies: this.props.hobbies});
   }
 
   toggleCheckbox(key){
     let checked = {...this.state.checked}
     checked[key] = !this.state.checked[key]
     this.setState({checked})
+  }
+
+  changeHobby(key, hobby){
+    let hobbies = this.state.hobbies.slice();
+    hobbies[key] = hobby
+    this.setState({hobbies});
   }
 
   handleDelete(e){
@@ -41,6 +45,7 @@ class HobbyIndex extends React.Component{
       editMode: {},
       hobbyId: this.state.hobbyId - Object.keys(this.state.checked).length
     })
+    this.props.setHobbies(this.state.hobbies);
   }
 
   handleEdit(e){
@@ -72,6 +77,7 @@ class HobbyIndex extends React.Component{
         editButtonMode: false,
         checked: {}
     });
+    this.props.setHobbies(this.state.hobbies);
   }
 
   render(){
