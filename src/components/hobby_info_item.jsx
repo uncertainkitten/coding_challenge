@@ -4,7 +4,7 @@ class HobbyInfoItem extends React.Component{
   render(){
     return(
       <div className="hobby-info">
-        <input type="checkbox" onChange={(e) => this.props.toggleCheckbox(this.props.index)} checked={this.props.checked}/>
+        <input className="emp-check" type="checkbox" onChange={(e) => this.props.toggleCheckbox(this.props.index)} checked={this.props.checked}/>
         <span className="emp-label">{this.props.hobbyText}</span>
       </div>
     )

@@ -122,7 +122,10 @@ class HobbyIndex extends React.Component{
     }
     return(
     <div className="hobby-index">
-      <legend className="emp-label">Hobbies</legend><button className="emp-btn" onClick={this.handleAdd}>Add</button>
+      <div className="top-hobby">
+        <legend className="emp-hobby-label">Hobbies</legend>
+        <button className="hobby-add-button" onClick={this.handleAdd}>Add</button>
+      </div>
       {hobbyComp}
       {editButton}
     </div>);

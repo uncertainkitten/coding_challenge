@@ -11,7 +11,7 @@ class NewHobbyIndexItem extends React.Component{
   render(){
     return(
       <div>
-        <input type="text" autoFocus value={this.props.hobbyText} onChange={(e) => this.props.changeHobby(this.props.index, e.target.value)}/>
+        <input className="emp-hobby-input" type="text" autoFocus value={this.props.hobbyText} onChange={(e) => this.props.changeHobby(this.props.index, e.target.value)}/>
       </div>
     );
   }

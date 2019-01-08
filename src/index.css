@@ -12,3 +12,280 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.login-form-box{
+  width: 400px;
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: column wrap;
+}
+
+.auth-label{
+  font-family: 'Cinzel', serif;
+  font-size: 14pt;
+  color: #343F3E;
+}
+
+.login-input{
+  height: 20px;
+  align-self: center;
+  margin: 10px;
+  color: #343F3E;
+  border: 1px solid #343F3E;
+}
+
+.username-box{
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.password-box{
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-submit{
+  background-color: #505A5B;
+  color: #DCEDFF;
+  box-shadow: none;
+  border: none;
+  margin: 5px;
+  align-self: center;
+  padding: 10px 50px;
+  font-size: 14pt;
+}
+
+.login-submit:hover{
+  cursor: pointer;
+}
+
+.employee-index{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: column wrap;
+}
+
+.top-right{
+  display: flex;
+  align-self: flex-end;
+  flex-direction: row;
+}
+.greeting{
+  font-family: 'Cinzel', serif;
+  font-size: 18pt;
+  color: #343F3E;
+}
+
+.logout-btn{
+  font-family: 'Cinzel', serif;
+  font-size: 12pt;
+  color: #505A5B;
+  box-shadow: none;
+  border: none;
+  margin: 5px;
+  align-self: center;
+  padding: 5px 20px;
+  border-radius: 4px;
+}
+
+.search-form{
+  width: 70%;
+  border: 1px solid #343F3E;
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+}
+
+.emp-label{
+  font-family: 'Cinzel', serif;
+  font-size: 14pt;
+  color: #343F3E;
+  align-self: center;
+  margin: 0px 30px;
+}
+
+.search-input{
+  height: 30px;
+  margin: 10px;
+  width: 40%;
+  color: #343F3E;
+  border: 1px solid #343F3E;
+}
+
+.search-btn{
+  background-color: #505A5B;
+  color: #DCEDFF;
+  box-shadow: none;
+  border: none;
+  margin: 10px;
+  padding: 5px 30px;
+  align-self: center;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+
+.search-btn:hover{
+  cursor: pointer;
+}
+
+.emp-info{
+  width: 100%;
+}
+
+.emp-form{
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emp-input{
+  height: 30px;
+  margin: 10px;
+  width: 57%;
+  color: #343F3E;
+  border: 1px solid #343F3E;
+}
+
+.emp-address-input{
+  height: 30px;
+  margin: 10px;
+  width: 60%;
+  color: #343F3E;
+  border: 1px solid #343F3E;
+}
+
+.emp-box{
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  width: 70%;
+}
+
+.emp-address-box{
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  width: 50%;
+}
+
+.emp-address-label{
+  align-self: flex-start;
+  font-family: 'Cinzel', serif;
+  font-size: 14pt;
+  margin-left: 20%;
+  color: #343F3E;
+}
+
+.hobby-box{
+  border: 1px solid #343F3E;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  width: 55%;
+  margin-right: 15%;
+}
+
+.hobby-index{
+  width: 90%;
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.top-hobby{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.hobby-add-button{
+  background-color: #505A5B;
+  color: #DCEDFF;
+  box-shadow: none;
+  border: none;
+  margin: 10px;
+  padding: 2px 20px;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+
+.hobby-add-button:hover{
+  cursor: pointer;
+}
+
+.emp-hobby-label{
+  font-family: 'Cinzel', serif;
+  font-size: 14pt;
+  color: #343F3E;
+  margin: 5px;
+  margin-right: 20%;
+  align-self: center;
+}
+
+.emp-btn{
+  background-color: #505A5B;
+  color: #DCEDFF;
+  box-shadow: none;
+  border: none;
+  margin: 10px;
+  margin-left: 75px;
+  padding: 2px 30px;
+  font-size: 14pt;
+  border-radius: 4px;
+}
+
+.emp-btn:hover{
+  cursor: pointer;
+}
+
+.hobby-info{
+  margin-left: 40px;
+}
+
+.emp-hobby-input{
+  height: 30px;
+  margin: 10px;
+  margin-left: 50px;
+  width: 300px;
+  color: #343F3E;
+  border: 1px solid #343F3E;
+}
+
+.emp-check:hover{
+  cursor: pointer;
+}
+
+.btn-box{
+  display: flex;
+  align-self: center;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 5px;
+  width: 70%;
+  margin-right: 50px;
+}
+
+.notify{
+  font-family: 'Cinzel', serif;
+  font-size: 12pt;
+  color: #343F3E;
+  align-self: center;
+  flex-basis: 100%;
+}

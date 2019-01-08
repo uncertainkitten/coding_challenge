@@ -1,11 +1,12 @@
 import React from 'react';
 import EmployeeInfoForm from './new_employee_form';
+import {Link} from 'react-router-dom';
 
 class EmployeeIndex extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username: localStorage.getItem("username"),
+      username: sessionStorage.getItem("username"),
       employeeId: "",
       payload: false,
       error: false
@@ -67,10 +68,12 @@ class EmployeeIndex extends React.Component {
     }
     return(
       <div className="employee-index">
-        <h3 className="greeting">Hi, {this.state.username}</h3>
-        <button className="logout-btn">Logout</button>
+        <div className="top-right">
+          <h3 className="greeting">Hi, {this.state.username}</h3>
+          <Link to="/" className="logout-btn">Logout</Link>
+        </div>
         <form className="search-form" onSubmit={this.handleSubmit} >
-          <label>Employee ID</label>
+          <label className="emp-label">Employee ID</label>
           <input type="text" value={this.state.employeeId} onChange={this.update("employeeId")} className="search-input" placeholder="ex. Emp1" />
           <input className="search-btn" type="submit"  value="Find" />
         </form>

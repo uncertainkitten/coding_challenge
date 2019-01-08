@@ -104,41 +104,55 @@ class EmployeeInfoForm extends React.Component{
   }
 
   render(){
-    let successMessage = <div>New employee created successfully!</div>;
+    let successMessage = <div className="notify">New employee created successfully!</div>;
     if (!this.state.success){
       successMessage = <div></div>
     }
 
     if (this.state.delSuccess){
-      successMessage = <div>Deleted employee successfully!</div>
+      successMessage = <div className="notify">Deleted employee successfully!</div>
     }
     let error = "";
     if (this.state.error){
-      error = <div>We couldn't process that request - please check to make sure you entered the correct information.</div>
+      error = <div className="notify">We couldn't process that request - please check to make sure you entered the correct information.</div>
     }
     return(
       <div className="emp-info">
         <form className="emp-form">
-          <label className="emp-label">Employee First Name:</label>
-          <input className="emp-input" type="text" value={this.state.firstName} onChange={this.update("firstName")}/>
-          <label className="emp-label">Employee Last Name:</label>
-          <input className="emp-input" type="text" value={this.state.lastName} onChange={this.update("lastName")}/>
-          <label className="emp-label">Address:</label>
-          <label className="emp-label">Street:</label>
-          <input className="emp-info" type="text" value={this.state.street} onChange={this.update("street")}/>
-          <label className="emp-label">City:</label>
-          <input className="emp-info" type="text" value={this.state.city} onChange={this.update("city")}/>
-          <label className="emp-label">State:</label>
-          <input className="emp-info" type="text" value={this.state.state} onChange={this.update("state")}/>
-          <label className="emp-label">Zip:</label>
-          <input className="emp-info" type="text" value={this.state.zip} onChange={this.update("zip")}/>
+          <div className="emp-box">
+            <label className="emp-label">Employee First Name : </label>
+            <input className="emp-input" type="text" value={this.state.firstName} onChange={this.update("firstName")}/>
+          </div>
+          <div className="emp-box">
+            <label className="emp-label">Employee Last Name : </label>
+            <input className="emp-input" type="text" value={this.state.lastName} onChange={this.update("lastName")}/>
+          </div>
+          <label className="emp-address-label">Address : </label>
+          <div className="emp-address-box">
+            <label className="emp-label">Street : </label>
+            <input className="emp-address-input" type="text" value={this.state.street} onChange={this.update("street")}/>
+          </div>
+          <div className="emp-address-box">
+            <label className="emp-label">City : </label>
+            <input className="emp-address-input" type="text" value={this.state.city} onChange={this.update("city")}/>
+          </div>
+          <div className="emp-address-box">
+            <label className="emp-label">State : </label>
+            <input className="emp-address-input" type="text" value={this.state.state} onChange={this.update("state")}/>
+          </div>
+          <div className="emp-address-box">
+            <label className="emp-label">Zip : </label>
+            <input className="emp-address-input" type="text" value={this.state.zip} onChange={this.update("zip")}/>
+          </div>
           <div className="hobby-box">
             <HobbyIndex hobbies={this.state.hobbies} setHobbies={this.setHobbies}/>
           </div>
-          <button className="delete-btn" onClick={this.handleDelete}>Delete Employee</button>
-          <button className="save-btn" onClick={this.handleSave}>Save Employee</button>
-          {successMessage}
-          {error}
+          <div className="btn-box">
+            <button className="emp-btn" onClick={this.handleDelete}>Delete Employee</button>
+            <button className="emp-btn" onClick={this.handleSave}>Save Employee</button>
+            {successMessage}
+            {error}
+          </div>
         </form>
       </div>
     )
