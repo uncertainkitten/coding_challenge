@@ -11,10 +11,10 @@ class NewHobbyIndexItem extends React.Component{
   render(){
     return(
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.hobbyText} onChange={this.props.changeHobby}/>
-        </form>
+        <input type="text" autoFocus value={this.props.hobbyText} onChange={(e) => this.props.changeHobby(this.props.index, e.target.value)}/>
       </div>
     );
   }
 }
+
+export default NewHobbyIndexItem;
