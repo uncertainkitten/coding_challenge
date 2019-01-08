@@ -49,7 +49,7 @@ class EmployeeInfoForm extends React.Component{
           <label className="emp-label">Zip:</label>
           <input className="emp-info" type="text" value={this.state.zip} onChange={this.update("zip")}/>
           <div className="hobby-box">
-            <HobbyIndex />
+            <HobbyIndex hobbies={this.props.hobbies}/>
           </div>
           <button className="delete-btn" onClick={this.handleDelete}>Delete Employee</button>
           <button className="save-btn" onClick={this.handleSave}>Create Employee</button>

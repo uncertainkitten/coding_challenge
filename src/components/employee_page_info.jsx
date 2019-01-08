@@ -32,7 +32,7 @@ class EmployeePageInfo extends React.Component{
         <label className="emp-label">State:</label><span className="emp-info">{this.props.address.state}</span>
         <label className="emp-label">Zip:</label><span className="emp-info">{this.props.address.zip}</span>
         <div className="hobby-box">
-          <HobbyIndex />
+          <HobbyIndex hobbies={this.props.hobbies}/>
         </div>
         <button className="delete-btn" onClick={this.handleDelete}>Delete Employee</button>
         <button className="save-btn" onClick={this.handleSave}>Create Employee</button>

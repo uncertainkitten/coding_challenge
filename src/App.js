@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginForm from './components/login';
+import HobbyIndex from './components/hobby_index';
 
 class App extends Component {
   render() {
     return (
       <div>
         <h1>It's a React App!</h1>
-        <LoginForm />
+        <HobbyIndex />
       </div>
     );
   }
