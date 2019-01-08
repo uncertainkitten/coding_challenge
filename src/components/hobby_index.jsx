@@ -16,10 +16,11 @@ class HobbyIndex extends React.Component{
     this.changeHobby = this.changeHobby.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   changeHobby(key, hobby){
-    let hobbies = this.state.hobbies.slice()
+    let hobbies = this.state.hobbies.slice();
     hobbies[key] = hobby
     this.setState({hobbies});
   }
@@ -30,8 +31,12 @@ class HobbyIndex extends React.Component{
     this.setState({checked})
   }
 
-  handleDelete(){
-
+  handleDelete(e){
+    e.preventDefault();
+    this.setState({
+      hobbies: this.state.hobbies.filter((hobby,index) => (!this.state.checked[index])),
+      checked: {}
+    })
   }
 
   handleEdit(){
@@ -60,9 +65,22 @@ class HobbyIndex extends React.Component{
   render(){
     let hobbyComp = this.state.hobbies.map((hobby, index) => {
       if (this.state.editMode[index]){
-        return <NewHobbyIndexItem hobbyText={hobby} index={index} changeHobby={this.changeHobby} toggleCheckbox={this.toggleCheckbox} />
+        return <NewHobbyIndexItem
+          hobbyText={hobby}
+          index={index}
+          key={index}
+          changeHobby={this.changeHobby}
+          toggleCheckbox={this.toggleCheckbox}
+          checked={!!this.state.checked[index]}
+        />
       }else{
-        return <HobbyInfoItem hobbyText={hobby} index={index} toggleCheckbox={this.toggleCheckbox}/>
+        return <HobbyInfoItem
+          hobbyText={hobby}
+          index={index}
+          key={index}
+          toggleCheckbox={this.toggleCheckbox}
+          checked={!!this.state.checked[index]}
+        />
       }
     });
     let editButton = <button className="emp-btn" onClick={this.handleEdit}>Edit</button>
@@ -73,7 +91,7 @@ class HobbyIndex extends React.Component{
     <div className="hobby-index">
       <legend className="emp-label">Hobbies</legend><button className="emp-btn" onClick={this.handleAdd}>Add</button>
       {hobbyComp}
-      {editButton}<input type="submit" className="emp-btn" value="Delete" />
+      {editButton}<button className="emp-btn" onClick={this.handleDelete}>Delete</button>
     </div>);
   }
 }

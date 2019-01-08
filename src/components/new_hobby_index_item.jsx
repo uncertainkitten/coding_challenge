@@ -11,7 +11,7 @@ class NewHobbyIndexItem extends React.Component{
   render(){
     return(
       <div>
-        <input type="checkbox" onChange={(e) => this.props.toggleCheckbox(this.props.key)}/>
+        <input type="checkbox" onChange={(e) => this.props.toggleCheckbox(this.props.index)} checked={this.props.checked}/>
         <input type="text" autoFocus value={this.props.hobbyText} onChange={(e) => this.props.changeHobby(this.props.index, e.target.value)}/>
       </div>
     );
