@@ -17,6 +17,7 @@ class HobbyIndex extends React.Component{
     this.handleSave = this.handleSave.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   changeHobby(key, hobby){
@@ -35,12 +36,22 @@ class HobbyIndex extends React.Component{
     e.preventDefault();
     this.setState({
       hobbies: this.state.hobbies.filter((hobby,index) => (!this.state.checked[index])),
-      checked: {}
+      checked: {},
+      editButtonMode: false,
+      editMode: {},
+      hobbyId: this.state.hobbyId - Object.keys(this.state.checked).length
     })
   }
 
-  handleEdit(){
-
+  handleEdit(e){
+    e.preventDefault();
+    let checked = Object.keys(this.state.checked);
+    let editMode = {...this.state.editMode};
+    checked.forEach(key => {editMode[key] = true});
+    this.setState({
+      editMode,
+      editButtonMode: true
+    });
   }
 
   handleAdd(e){
@@ -58,7 +69,8 @@ class HobbyIndex extends React.Component{
     e.preventDefault();
     this.setState({
         editMode: {},
-        editButtonMode: false
+        editButtonMode: false,
+        checked: {}
     });
   }
 
@@ -83,7 +95,7 @@ class HobbyIndex extends React.Component{
         />
       }
     });
-    let editButton = <button className="emp-btn" onClick={this.handleEdit}>Edit</button>
+    let editButton = <div className="btns"><button className="emp-btn" onClick={this.handleEdit}>Edit</button><button className="emp-btn" onClick={this.handleDelete}>Delete</button></div>
     if (this.state.editButtonMode){
       editButton = <button className="emp-btn" onClick={this.handleSave}>Save</button>
     }
@@ -91,16 +103,9 @@ class HobbyIndex extends React.Component{
     <div className="hobby-index">
       <legend className="emp-label">Hobbies</legend><button className="emp-btn" onClick={this.handleAdd}>Add</button>
       {hobbyComp}
-      {editButton}<button className="emp-btn" onClick={this.handleDelete}>Delete</button>
+      {editButton}
     </div>);
   }
 }
 
 export default HobbyIndex;
-
-// Thoughts about Hobby Index - I probably want to store the hobbies as a hash so I can key in to modify it easier
-// Challenges - I need to figure out what keys will work and be passable through the various local states
-// Hobby Index Item - has Edit state and Info state - Edit causes it to display NHII - Info is basic HII
-// Checkbox will pass check upwards
-// OH! I can hash with the hobby label, and then the edit state of true or false - that should work
-// Something something functions and callbacks
