@@ -3,23 +3,42 @@ import HobbyIndex from './hobby_index'
 
 class EmployeeInfoForm extends React.Component{
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
-      name: this.props.firstName + this.props.lastName,
-      street: this.props.street,
-      city: this.props.city,
-      state: this.props.state,
-      zip: this.props.zip,
-      hobbies: ["Pure", "Fucking", "Magic"]
+      firstName: "",
+      lastName: "",
+      street: "",
+      city: "",
+      state: "",
+      country: "USA",
+      zip: 0,
+      hobbies: []
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.setHobbies = this.setHobbies.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    if (this.props !== nextProps){
+      this.setState({
+        firstName: nextProps.firstName,
+        lastName: nextProps.lastName,
+        street: nextProps.address.street,
+        city: nextProps.address.city,
+        state: nextProps.address.state,
+        zip: nextProps.address.zip,
+        country: "USA",
+        hobbies: nextProps.hobbies,
+        error: false,
+        success: false
+      });
+    }
+  }
+
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value
+      [field]: e.target.value
     });
   }
 
@@ -29,7 +48,31 @@ class EmployeeInfoForm extends React.Component{
 
   handleSave(e){
     e.preventDefault();
-    //Make a POST request to cts/employees
+    let postData = {};
+    let address = {};
+    address.street = this.state.street;
+    address.city = this.state.city;
+    address.state = this.state.state;
+    address.zip = this.state.zip;
+    address.country = "USA";
+    postData.firstName = this.state.firstName;
+    postData.lastName = this.state.lastName;
+    postData.address = address;
+    postData.hobbies = this.state.hobbies
+    fetch('http://104.248.219.208:8080/cts/employee', {
+      method: 'post',
+      body: JSON.stringify(postData),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(data => {
+      this.setState({success: true});
+      this.props.getEmployee(data.empId);
+    })
+    .catch(error => {
+      this.setState({error: true});
+      console.log(error)})
   }
 
   handleDelete(e){
@@ -39,11 +82,21 @@ class EmployeeInfoForm extends React.Component{
   }
 
   render(){
+    let successMessage = <div>New Employee Created Successfully</div>;
+    if (!this.state.success){
+      successMessage = <div></div>
+    }
+    let error = "";
+    if (this.state.error){
+      error = <div>Something went wrong!</div>
+    }
     return(
       <div className="emp-info">
         <form className="emp-form">
-          <label className="emp-label">Employee Name:</label>
-          <input className="emp-input" type="text" value={this.state.name} onChange={this.update("name")}/>
+          <label className="emp-label">Employee First Name:</label>
+          <input className="emp-input" type="text" value={this.state.firstName} onChange={this.update("firstName")}/>
+          <label className="emp-label">Employee Last Name:</label>
+          <input className="emp-input" type="text" value={this.state.lastName} onChange={this.update("lastName")}/>
           <label className="emp-label">Address:</label>
           <label className="emp-label">Street:</label>
           <input className="emp-info" type="text" value={this.state.street} onChange={this.update("street")}/>
@@ -57,7 +110,9 @@ class EmployeeInfoForm extends React.Component{
             <HobbyIndex hobbies={this.state.hobbies} setHobbies={this.setHobbies}/>
           </div>
           <button className="delete-btn" onClick={this.handleDelete}>Delete Employee</button>
-          <button className="save-btn" onClick={this.handleSave}>Create Employee</button>
+          <button className="save-btn" onClick={this.handleSave}>Save Employee</button>
+          {successMessage}
+          {error}
         </form>
       </div>
     )

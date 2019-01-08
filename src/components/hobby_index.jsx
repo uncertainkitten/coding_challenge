@@ -24,6 +24,12 @@ class HobbyIndex extends React.Component{
     this.setState({hobbies: this.props.hobbies});
   }
 
+  componentWillReceiveProps(nextProps){
+    if (this.props.hobbies !== nextProps.hobbies){
+      this.setState({hobbies: nextProps.hobbies, hobbyId: nextProps.hobbies.length - 1});
+    }
+  }
+
   toggleCheckbox(key){
     let checked = {...this.state.checked}
     checked[key] = !this.state.checked[key]
@@ -44,8 +50,8 @@ class HobbyIndex extends React.Component{
       editButtonMode: false,
       editMode: {},
       hobbyId: this.state.hobbyId - Object.keys(this.state.checked).length
-    })
-    this.props.setHobbies(this.state.hobbies);
+    });
+    this.props.setHobbies(this.state.hobbies.filter((hobby,index) => (!this.state.checked[index])));
   }
 
   handleEdit(e){
